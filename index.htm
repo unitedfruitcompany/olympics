@@ -17,8 +17,12 @@
 const requestData = async function() {
 
   const input = await d3.csv('athlete_events.csv');
+  //this is the unfiltered data cause it also includes people
+  // who did not get a medal (losers)
   console.log(input);
 
+  // this is here to filter out the people who didnt get a medals
+  // this is the var that we want to work with
   var medals = input.filter(function(input) {
     return input.Medal !== 'NA'
 //    &&
@@ -44,13 +48,14 @@ const requestData = async function() {
 
 
 
-
+// my first attempt to filter out by country
+// kind of a tedious way of doing this but,
+// i had to try something.....
+// all my efforts... for what! well see!
+// for DEUTSCHLAND!
 
   var germany = medals.filter(function(medals) {
     return medals.Team === 'Germany'
-//     &&
-//    input.Medal === 'Silver' ||
-//    input.Medal === 'Gold';
   })
 
   console.log(germany)
@@ -76,12 +81,21 @@ const requestData = async function() {
 
   })
 
+  // this is here to see if i can actually count the number of medals
+  // turns out i can, i found it funny that the amount of
+  // German olympic athletes who got a medal turned out to be
+  // 1984... :0
+
   console.log(gold_count)
   console.log(silver_count)
   console.log(bronze_count)
   console.log(gold_count + silver_count + bronze_count)
 
   countries = {}
+
+// i was tryig to get a list of countries in the dataset
+// sometimes the countries repeat and i wanted to not get repeating values
+// i failed... but with your help, i think i can succeed here!
 
   medals.forEach((d,i) => {
 
@@ -102,6 +116,8 @@ const requestData = async function() {
 
 
   })
+
+  // this came out ugly, remove if wanted
 
   console.log(countries)
 
